@@ -10,21 +10,49 @@ interface IPost {
 }
 
 const defaultPosts: IPost[] = [];
+const defaultLoadingState = true;
 
-const App = () => {
-  const [posts, setPosts]: [IPost[], (posts: IPost[]) => void] =
-    React.useState(defaultPosts);
-  const [loading, setLoading]: [boolean, (loading: boolean) => void] =
-    React.useState<boolean>(true);
-  const [error, setError]: [string, (error: string) => void] =
-    React.useState("");
-};
+type SetPostsHook = (posts: IPost[]) => void;
+type SetLoadingHook = (loading: boolean) => void;
 
-const [posts, setPosts]: [IPost[], (posts: IPost[]) => void] =
-  React.useState(defaultPosts);
-const [loading, setLoading]: [boolean, (loading: boolean) => void] =
-  React.useState<boolean>(true);
-const [error, setError]: [string, (error: string) => void] = React.useState("");
+function App() {
+  const [posts, setPosts]: [IPost[], SetPostsHook] = useState(defaultPosts);
+  const [loading, setLoading]: [boolean, SetLoadingHook] =
+    useState(defaultLoadingState);
+  const [error, setError]: [string, SetErrorHook] = useState("");
+}
+
+// const App = () => {
+//   const [posts, setPosts]: [IPost[], (posts: IPost[]) => void] =
+//     React.useState(defaultPosts);
+//   const [loading, setLoading]: [boolean, (loading: boolean) => void] =
+//     React.useState<boolean>(true);
+//   const [error, setError]: [string, (error: string) => void] =
+//     React.useState("");
+// };
+
+// const [posts, setPosts]: [IPost[], (posts: IPost[]) => void] =
+//   React.useState(defaultPosts);
+// const [loading, setLoading]: [boolean, (loading: boolean) => void] =
+//   React.useState<boolean>(true);
+// const [error, setError]: [string, (error: string) => void] = React.useState("");
+
+// React.useEffect(() => {
+//   axios.get<IPost[]>("https://jsonplaceholder.typicode.com/posts", {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
+// }, []);
+
+// React.useEffect(() => {
+//   axios
+//     .get<IPost[]>(...)
+//     .then(response => {
+//       setPosts(response.data);
+//       setLoading(false);
+//     });
+// }, []);
 
 // function App() {
 //   return (
